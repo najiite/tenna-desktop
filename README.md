@@ -1,5 +1,11 @@
 # Tenna IPTV Player for desktop
 
+## Download
+
+**[Download Tenna IPTV Player for Windows (1.0.0)](https://github.com/najiite/tenna-desktop/raw/main/release/Tenna%20IPTV%20Player%20Setup%201.0.0.exe)** (about 115 MB, 64-bit Windows)
+
+Run the installer. The installer is not code-signed yet, so Windows SmartScreen may warn: choose "More info", then "Run anyway".
+
 The Expo web build of `../tenna-iptv-player` in an Electron window, packaged as a Windows installer.
 
 ```bash

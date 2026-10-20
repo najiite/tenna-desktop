@@ -1,5 +1,5 @@
 appId: com.najiite.tenna.desktop
-productName: Tenna
+productName: Tenna IPTV Player
 directories:
   output: release
   buildResources: build
@@ -7,12 +7,14 @@ files:
   - main.js
   - package.json
   - app/**
+  - build/icon.png
+afterPack: build/after-pack.js
 win:
   target:
     - target: nsis
       arch: [x64]
-  icon: build/icon.png
-  # Building from macOS has no Wine to stamp the icon and version into the .exe; turn this on when building on Windows
+  icon: build/icon.ico
+  # The icon and version are stamped into the .exe by build/after-pack.js (rcedit would need Wine on a Mac)
   signAndEditExecutable: false
 nsis:
   oneClick: false

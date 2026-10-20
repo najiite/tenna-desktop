@@ -1,4 +1,4 @@
-# Tenna desktop
+# Tenna IPTV Player for desktop
 
 The Expo web build of `../tenna-iptv-player` in an Electron window, packaged as a Windows installer.
 
@@ -6,7 +6,7 @@ The Expo web build of `../tenna-iptv-player` in an Electron window, packaged as 
 npm install
 npm run web        # exports the web build into ./app (run again after every app change)
 npm start          # run it locally
-npm run dist:win   # release/Tenna Setup <version>.exe (NSIS installer)
+npm run dist:win   # release/Tenna IPTV Player Setup <version>.exe (NSIS installer)
 ```
 
 - The window serves `./app` from `tenna://app/`, so the app's absolute paths and router paths work.

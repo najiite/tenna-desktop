@@ -4,7 +4,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 
-const APP_DIR = path.join(__dirname, 'app');
+const APP_DIR = process.env.TENNA_APP_DIR || path.join(__dirname, 'app'); // the override is for testing a different build
+const ICON = path.join(__dirname, 'build', 'icon.png'); // the window and taskbar icon (the .exe's own icon is stamped at build time)
 const SCHEME = 'tenna';
 const HIDDEN = process.env.TENNA_HIDDEN === '1'; // automated checks: no visible window
 if (process.env.TENNA_DEBUG_PORT) app.commandLine.appendSwitch('remote-debugging-port', process.env.TENNA_DEBUG_PORT);
@@ -34,7 +35,8 @@ function createWindow() {
     minWidth: 420,
     minHeight: 600,
     show: !HIDDEN,
-    title: 'Tenna',
+    title: 'Tenna IPTV Player',
+    icon: ICON,
     backgroundColor: '#000000',
     autoHideMenuBar: true,
     webPreferences: {
@@ -76,6 +78,7 @@ if (!app.requestSingleInstanceLock()) {
   });
   app.whenReady().then(() => {
     protocol.handle(SCHEME, serveApp);
+    if (process.platform === 'darwin') app.dock?.setIcon(ICON);
     if (process.platform !== 'darwin') Menu.setApplicationMenu(null); // macOS keeps its menu (copy/paste, quit)
     createWindow();
     app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });

@@ -1,0 +1,23 @@
+appId: com.najiite.tenna.desktop
+productName: Tenna
+directories:
+  output: release
+  buildResources: build
+files:
+  - main.js
+  - package.json
+  - app/**
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: build/icon.png
+  # Building from macOS has no Wine to stamp the icon and version into the .exe; turn this on when building on Windows
+  signAndEditExecutable: false
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  perMachine: false
+mac:
+  category: public.app-category.entertainment
+  icon: build/icon.png

@@ -1,0 +1,19 @@
+{
+  "name": "tenna-desktop",
+  "productName": "Tenna",
+  "version": "1.0.0",
+  "description": "Tenna IPTV Player for Windows (and macOS), the Expo web build in an Electron shell",
+  "main": "main.js",
+  "author": "Tenna",
+  "private": true,
+  "scripts": {
+    "web": "cd ../tenna-iptv-player && npx expo export --platform web --output-dir ../tenna-desktop/app",
+    "start": "node scripts/start.js",
+    "dist:win": "electron-builder --win --x64",
+    "dist:mac": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "electron": "^44.9.0",
+    "electron-builder": "^26.15.3"
+  }
+}

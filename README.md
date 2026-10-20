@@ -12,6 +12,63 @@ file on an Apple Silicon Mac works but is several times slower. All versions are
 The installers are not code-signed yet. Windows SmartScreen may warn: choose "More info", then "Run anyway". On a Mac, right-click the
 app and choose Open the first time (or run `xattr -cr "/Applications/Tenna IPTV Player.app"`).
 
+## What it does
+
+Tenna is a player only: it ships with no channels or content, you bring your own Xtream Codes account or M3U playlist.
+
+**Library**
+- Xtream Codes and M3U playlists, several saved at once, one active at a time. The library is saved on the computer and appears at once
+  on the next launch, then refreshes in the background (Settings → Library Updates).
+- Profiles with their own favourites and history, including a Kids profile with a PIN; hide, reorder and merge categories.
+- One search across live TV (with what is on now), movies and series.
+
+**Live TV**
+- Grid or list, sorting, favourites, quality badges and Now/Next on every channel.
+- A TV guide: Now/Next in the player and a full guide. *Manage EPG* shifts a provider's times and reloads the guide.
+- A frozen or stopped stream reconnects by itself (a nudge, then a fresh start, with waits between tries) and waits for the network if
+  you are offline.
+- **Multi-view:** 2 to 4 channels at once, one with sound. **Cross-playlist view:** one channel from each of 2 to 4 playlists, each on its
+  own account. Every view reconnects by itself; tap one for previous channel, pause and next channel.
+
+**Movies and series**
+- Details pages, Continue Watching, *auto-play next episode*, and *Skip intro* that learns from your own skips.
+- A seek bar that shows what is buffered, playback speed, and a list of the film's **audio languages and subtitles**, read from the file.
+- Films with Dolby Digital or DTS sound play with sound (re-encoded on the fly, see below).
+
+**Home and sports**
+- A hero banner of trending titles, Continue Watching, and rows of new movies, series and live entertainment.
+- Sports: live scores and fixtures by league (from ESPN's unofficial public scoreboard); tap a match to open the best channel for it.
+
+**On the desktop**
+- Keyboard: **Space** or **K** pause, **← / →** skip, **↑ / ↓** volume, **M** mute, **F** or double-click full screen, **PageUp / PageDown**
+  change channel, **Esc** back. A click shows or hides the controls; the mouse wheel changes the volume.
+- A dark title bar in the app's colours (Mac traffic lights; Windows buttons), a remembered window size and position, a Mac menu bar,
+  Picture-in-Picture, and sheets you can drag down, press Esc on, or click outside to close.
+
+**Not on desktop (phones and tablets only):** Live Rewind, recordings, offline downloads, the home-screen widget and Live Activity,
+AirPlay, and kick-off notifications for favourite teams. The phone app has all of these; see the
+[app's README](https://github.com/najiite/tenna-iptv-player#features).
+
+## Building from source
+
+The Expo web build of [tenna-iptv-player](https://github.com/najiite/tenna-iptv-player) (expected next to this folder) in an Electron
+window, packaged as installers for Windows and Mac.
+
+```bash
+npm install
+npm run web        # exports the web build into ./app (run again after every app change)
+npm start          # run it locally
+npm run dist:win   # release/Tenna IPTV Player Setup <version>.exe
+npm run dist:mac   # release/*.dmg for Apple Silicon and Intel
+```
+
+- The window serves `./app` from `tenna://app/`, so the app's absolute paths and router paths work.
+- `webSecurity` is off so the app can read providers' plain-http streams and playlists, which send no CORS headers. The window only
+  loads the app's own files.
+- The Windows icon and version info are stamped into the `.exe` by `build/after-pack.js`, so the installer can be built on a Mac
+  without Wine. An unsigned installer still shows SmartScreen warnings.
+- VS Code's terminal sets `ELECTRON_RUN_AS_NODE`; `npm start` clears it.
+
 ## Audio and subtitles
 
 The browser engine inside Electron plays AAC, MP3 and Opus, but not Dolby Digital (AC-3 / E-AC-3), DTS or MP2, which many films

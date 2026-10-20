@@ -5,11 +5,15 @@ directories:
   buildResources: build
 files:
   - main.js
+  - preload.js
   - package.json
   - app/**
   - build/icon.png
 afterPack: build/after-pack.js
 win:
+  extraResources:
+    - from: build/ffmpeg/win32-x64
+      to: ffmpeg
   target:
     - target: nsis
       arch: [x64]
@@ -21,5 +25,17 @@ nsis:
   allowToChangeInstallationDirectory: true
   perMachine: false
 mac:
+  # Named for the chip: mac-arm64 is for Apple Silicon (M1 and later), mac-x64 for Intel Macs
+  artifactName: Tenna-IPTV-Player-${version}-mac-${arch}.${ext}
+  extraResources:
+    - from: build/ffmpeg/darwin-${arch}
+      to: ffmpeg
   category: public.app-category.entertainment
   icon: build/icon.png
+  target:
+    - target: dmg
+      arch: [arm64, x64]
+  # Unsigned for now: signing and notarizing needs an Apple Developer ID (see README)
+  identity: null
+dmg:
+  title: Tenna IPTV Player

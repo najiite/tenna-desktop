@@ -1,9 +1,7 @@
 node_modules/
 app/
 .DS_Store
-# The installer in release/ can be committed (see .gitattributes: it is stored with Git LFS); the rest of the build output is not
-release/win-unpacked/
-release/mac*/
-release/*.blockmap
-release/builder-debug.yml
-release/.icon-ico/
+# Installers are published on the GitHub release page, not committed
+release/
+# Downloaded by scripts/fetch-ffmpeg.js (about 200 MB)
+build/ffmpeg/

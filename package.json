@@ -9,8 +9,9 @@
   "scripts": {
     "web": "cd ../tenna-iptv-player && npx expo export --platform web --output-dir ../tenna-desktop/app",
     "start": "node scripts/start.js",
-    "dist:win": "electron-builder --win --x64",
-    "dist:mac": "electron-builder --mac"
+    "dist:win": "node scripts/fetch-ffmpeg.js win32-x64 && electron-builder --win --x64",
+    "dist:mac": "node scripts/fetch-ffmpeg.js darwin-arm64 darwin-x64 && electron-builder --mac",
+    "fetch-ffmpeg": "node scripts/fetch-ffmpeg.js"
   },
   "devDependencies": {
     "electron": "^44.9.0",

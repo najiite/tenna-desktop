@@ -46,7 +46,7 @@ Tenna is a player only: it ships with no channels or content, you bring your own
   Picture-in-Picture, and sheets you can drag down, press Esc on, or click outside to close.
 
 **Not on desktop (phones and tablets only):** Live Rewind, recordings, offline downloads, the home-screen widget and Live Activity,
-AirPlay, and kick-off notifications for favourite teams. The phone app has all of these; see the
+AirPlay, kick-off notifications for favourite teams, and the full TV guide for a category (with a guide address of your own). The phone app has all of these; see the
 [app's README](https://github.com/najiite/tenna-iptv-player#features).
 
 ## Building from source

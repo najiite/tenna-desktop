@@ -11,6 +11,8 @@
     "start": "node scripts/start.js",
     "dist:win": "node scripts/fetch-ffmpeg.js win32-x64 && electron-builder --win --x64",
     "dist:mac": "node scripts/fetch-ffmpeg.js darwin-arm64 darwin-x64 && electron-builder --mac",
+    "release:win": "node scripts/fetch-ffmpeg.js win32-x64 && electron-builder --win --x64 --publish always",
+    "release:mac": "node scripts/fetch-ffmpeg.js darwin-arm64 darwin-x64 && electron-builder --mac --publish always",
     "fetch-ffmpeg": "node scripts/fetch-ffmpeg.js"
   },
   "devDependencies": {
@@ -18,5 +20,8 @@
     "electron-builder": "^26.15.3",
     "png-to-ico": "^3.0.2",
     "resedit": "^3.1.0"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
   }
 }

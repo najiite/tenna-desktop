@@ -10,6 +10,11 @@ files:
   - app/**
   - build/icon.png
 afterPack: build/after-pack.js
+# Installers go to a GitHub release; the app reads latest.yml / latest-mac.yml from it to find updates (see checkForUpdates in main.js)
+publish:
+  provider: github
+  owner: najiite
+  repo: tenna-desktop
 win:
   extraResources:
     - from: build/ffmpeg/win32-x64
@@ -34,6 +39,9 @@ mac:
   icon: build/icon.png
   target:
     - target: dmg
+      arch: [arm64, x64]
+    # electron-updater reads the Mac update from a .zip; the .dmg is what people download
+    - target: zip
       arch: [arm64, x64]
   # Unsigned for now: signing and notarizing needs an Apple Developer ID (see README)
   identity: null

@@ -7,6 +7,7 @@ const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
+const { autoUpdater } = require('electron-updater');
 
 const APP_NAME = 'Tenna IPTV Player';
 const APP_DIR = process.env.TENNA_APP_DIR || path.join(__dirname, 'app'); // the override is for testing a different build
@@ -351,6 +352,43 @@ function warnIfWrongMacBuild() {
   }).then(({ response }) => { if (response === 0) shell.openExternal('https://github.com/najiite/tenna-desktop/releases/latest'); }).catch(() => {});
 }
 
+// --- Updates ------------------------------------------------------------------------------------------------------
+// Windows downloads a new version in the background and offers to restart into it. A Mac can only install an update by itself
+// when the app is signed, and this one is not yet, so there it offers the downloads page instead. Set MAC_SIGNED to true once
+// the Mac build is signed and notarized (identity in electron-builder.yml) and Macs update the same way as Windows.
+const MAC_SIGNED = false;
+const RELEASES_URL = 'https://github.com/najiite/tenna-desktop/releases/latest';
+
+function checkForUpdates() {
+  if (!app.isPackaged || process.env.TENNA_HIDDEN === '1') return; // a development run has no release to compare with
+  const selfInstall = !IS_MAC || MAC_SIGNED;
+  autoUpdater.autoDownload = selfInstall;
+  autoUpdater.autoInstallOnAppQuit = selfInstall; // an update that was downloaded is applied when the app is closed
+  autoUpdater.on('error', () => {}); // offline or rate limited: try again next launch
+  if (selfInstall) {
+    autoUpdater.on('update-downloaded', (info) => {
+      dialog.showMessageBox({
+        type: 'info',
+        message: `Tenna ${info.version} is ready`,
+        detail: 'Restart to finish updating. It will also install the next time you close the app.',
+        buttons: ['Restart now', 'Later'],
+        defaultId: 0,
+      }).then(({ response }) => { if (response === 0) autoUpdater.quitAndInstall(); }).catch(() => {});
+    });
+  } else {
+    autoUpdater.on('update-available', (info) => {
+      dialog.showMessageBox({
+        type: 'info',
+        message: `Tenna ${info.version} is available`,
+        detail: 'Download the new version from the releases page and open it to replace this one.',
+        buttons: ['Open the downloads page', 'Later'],
+        defaultId: 0,
+      }).then(({ response }) => { if (response === 0) shell.openExternal(RELEASES_URL); }).catch(() => {});
+    });
+  }
+  autoUpdater.checkForUpdates().catch(() => {});
+}
+
 // The menu bar on a Mac (copy and paste and the usual window shortcuts live here); Windows has none
 function buildMacMenu() {
   return Menu.buildFromTemplate([
@@ -397,6 +435,7 @@ if (!app.requestSingleInstanceLock()) {
     await startAudioProxy(); // the window's preload asks for its port
     createWindow();
     warnIfWrongMacBuild();
+    checkForUpdates();
     app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
   });
   app.on('window-all-closed', () => { if (!IS_MAC) app.quit(); });

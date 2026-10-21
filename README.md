@@ -69,6 +69,26 @@ npm run dist:mac   # release/*.dmg for Apple Silicon and Intel
   without Wine. An unsigned installer still shows SmartScreen warnings.
 - VS Code's terminal sets `ELECTRON_RUN_AS_NODE`; `npm start` clears it.
 
+## Updates
+
+Packaged builds check this repo's latest GitHub release at launch (`electron-updater`, `checkForUpdates` in `main.js`).
+
+- **Windows** downloads the new version in the background and offers to restart into it (or installs it when the app is closed).
+- **Mac** only offers a link to the downloads page for now: Squirrel.Mac refuses to install an update into an unsigned app. Once the
+  Mac build is signed and notarized, set `identity` in `electron-builder.yml` and `MAC_SIGNED` in `main.js` to `true`.
+
+To ship a version:
+
+```bash
+# bump "version" in package.json first: the app only updates to a higher version
+export GH_TOKEN=<a GitHub token with repo access>
+npm run web          # re-export the web build
+npm run release:win  # builds and uploads the .exe, its .blockmap and latest.yml
+npm run release:mac  # builds and uploads both .dmg files, the .zip files and latest-mac.yml
+```
+
+The release is created as a draft: publish it on GitHub, or the app will not see it.
+
 ## Audio and subtitles
 
 The browser engine inside Electron plays AAC, MP3 and Opus, but not Dolby Digital (AC-3 / E-AC-3), DTS or MP2, which many films

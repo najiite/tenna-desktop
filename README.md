@@ -47,11 +47,11 @@ Tenna is a player only: it ships with no channels or content, you bring your own
 
 **Not on desktop (phones and tablets only):** Live Rewind, recordings, offline downloads, the home-screen widget and Live Activity,
 AirPlay, kick-off notifications for favourite teams, and the full TV guide for a category (with a guide address of your own). The phone app has all of these; see the
-[app's README](https://github.com/najiite/tenna-iptv-player#features).
+[features page](https://tennaplayer.com/features/).
 
 ## Building from source
 
-The Expo web build of [tenna-iptv-player](https://github.com/najiite/tenna-iptv-player) (expected next to this folder) in an Electron
+The Expo web build of tenna-iptv-player (a private project, expected next to this folder) in an Electron
 window, packaged as installers for Windows and Mac.
 
 ```bash

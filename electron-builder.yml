@@ -26,12 +26,15 @@ win:
   # The icon and version are stamped into the .exe by build/after-pack.js (rcedit would need Wine on a Mac)
   signAndEditExecutable: false
 nsis:
+  # No version in the file name: the website links to .../releases/latest/download/Tenna-IPTV-Player-Setup.exe
+  artifactName: Tenna-IPTV-Player-Setup.exe
   oneClick: false
   allowToChangeInstallationDirectory: true
   perMachine: false
 mac:
   # Named for the chip: mac-arm64 is for Apple Silicon (M1 and later), mac-x64 for Intel Macs
-  artifactName: Tenna-IPTV-Player-${version}-mac-${arch}.${ext}
+  # No version in the file name either: the website links to .../releases/latest/download/Tenna-IPTV-Player-mac-<chip>.dmg
+  artifactName: Tenna-IPTV-Player-mac-${arch}.${ext}
   extraResources:
     - from: build/ffmpeg/darwin-${arch}
       to: ffmpeg

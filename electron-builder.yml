@@ -1,5 +1,6 @@
 appId: com.najiite.tenna.desktop
 productName: Tenna IPTV Player
+copyright: Copyright © 2026 Onajite Kelvin Okeh
 directories:
   output: release
   buildResources: build

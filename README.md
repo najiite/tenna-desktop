@@ -18,7 +18,7 @@ Tenna is a player only: it ships with no channels or content, you bring your own
 
 **Library**
 - Xtream Codes and M3U playlists, several saved at once, one active at a time. The library is saved on the computer and appears at once
-  on the next launch, then refreshes in the background (Settings → Library Updates).
+  on the next launch, then refreshes in the background (Settings → Playlist Settings).
 - Profiles with their own favourites and history, including a Kids profile with a PIN; hide, reorder and merge categories.
 - One search across live TV (with what is on now), movies and series.
 

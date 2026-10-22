@@ -4,7 +4,7 @@
   "version": "1.0.2",
   "description": "Tenna IPTV Player for Windows (and macOS), the Expo web build in an Electron shell",
   "main": "main.js",
-  "author": "Tenna",
+  "author": "Onajite Kelvin Okeh",
   "private": true,
   "scripts": {
     "web": "cd ../tenna-iptv-player && npx expo export --platform web --output-dir ../tenna-desktop/app",

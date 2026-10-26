@@ -1,7 +1,7 @@
 {
   "name": "tenna-desktop",
   "productName": "Tenna IPTV Player",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Tenna IPTV Player for Windows (and macOS), the Expo web build in an Electron shell",
   "main": "main.js",
   "author": "Onajite Kelvin Okeh",

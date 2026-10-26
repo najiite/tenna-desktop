@@ -74,8 +74,7 @@ npm run dist:mac   # release/*.dmg for Apple Silicon and Intel
 Packaged builds check this repo's latest GitHub release at launch (`electron-updater`, `checkForUpdates` in `main.js`).
 
 - **Windows** downloads the new version in the background and offers to restart into it (or installs it when the app is closed).
-- **Mac** only offers a link to the downloads page for now: Squirrel.Mac refuses to install an update into an unsigned app. Once the
-  Mac build is signed and notarized, set `identity` in `electron-builder.yml` and `MAC_SIGNED` in `main.js` to `true`.
+- **Mac** updates the same way, now that the build is signed and notarized (`MAC_SIGNED` in `main.js`; Squirrel.Mac refuses to install an update into an unsigned app).
 
 To ship a version:
 
@@ -121,7 +120,7 @@ Two files, named for the chip: **`mac-arm64`** is for Apple Silicon Macs (M1 and
 shows which you have. The Intel one on an Apple Silicon Mac runs through Rosetta and is several times slower (the app warns about it
 once).
 
-`npm run dist:mac` builds `.dmg` files for Apple Silicon and Intel. They are not signed or notarized: macOS will say the app
-cannot be checked (right-click it and choose Open, or run `xattr -cr "/Applications/Tenna IPTV Player.app"`). Signing needs an
-Apple Developer ID.
+`npm run dist:mac` builds `.dmg` files for Apple Silicon and Intel, signed with the Developer ID Application certificate in the
+keychain and notarized by Apple. Notarizing needs `APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD` (made at appleid.apple.com) and
+`APPLE_TEAM_ID` set in the shell that runs the build; they are never stored in the repository.
 

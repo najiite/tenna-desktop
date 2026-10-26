@@ -47,7 +47,9 @@ mac:
     # electron-updater reads the Mac update from a .zip; the .dmg is what people download
     - target: zip
       arch: [arm64, x64]
-  # Unsigned for now: signing and notarizing needs an Apple Developer ID (see README)
-  identity: null
+  # Signed with the Developer ID Application certificate in the keychain and notarized by Apple. Notarizing logs in with
+  # APPLE_ID, APPLE_APP_SPECIFIC_PASSWORD and APPLE_TEAM_ID from the environment (never committed; see README)
+  hardenedRuntime: true
+  notarize: true
 dmg:
   title: Tenna IPTV Player

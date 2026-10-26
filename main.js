@@ -354,9 +354,9 @@ function warnIfWrongMacBuild() {
 
 // --- Updates ------------------------------------------------------------------------------------------------------
 // Windows downloads a new version in the background and offers to restart into it. A Mac can only install an update by itself
-// when the app is signed, and this one is not yet, so there it offers the downloads page instead. Set MAC_SIGNED to true once
-// the Mac build is signed and notarized (identity in electron-builder.yml) and Macs update the same way as Windows.
-const MAC_SIGNED = false;
+// when the app is signed, so MAC_SIGNED must stay true only while the Mac build is signed and notarized (electron-builder.yml);
+// otherwise a Mac offers the downloads page instead.
+const MAC_SIGNED = true;
 const RELEASES_URL = 'https://github.com/najiite/tenna-desktop/releases/latest';
 
 function checkForUpdates() {

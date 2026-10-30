@@ -5,7 +5,7 @@
 - **Windows (64-bit):** [Tenna-IPTV-Player-Setup.exe](https://github.com/najiite/tenna-desktop/releases/latest/download/Tenna-IPTV-Player-Setup.exe) (about 130 MB)
 - **Mac, Apple Silicon (M1 and later):** [Tenna-IPTV-Player-mac-arm64.dmg](https://github.com/najiite/tenna-desktop/releases/latest/download/Tenna-IPTV-Player-mac-arm64.dmg) (about 145 MB)
 - **Mac, Intel:** [Tenna-IPTV-Player-mac-x64.dmg](https://github.com/najiite/tenna-desktop/releases/latest/download/Tenna-IPTV-Player-mac-x64.dmg) (about 155 MB)
-- **Android TV and Fire TV (early release):** [Tenna-IPTV-Player-AndroidTV.apk](https://github.com/najiite/tenna-desktop/releases/download/android-tv-v1.0.0/Tenna-IPTV-Player-AndroidTV.apk) (about 300 MB). Installed from the file (for example with the Downloader app), used with the TV remote; Android 8 or later.
+- **Android TV and Fire TV (early release):** [Tenna-IPTV-Player-AndroidTV.apk](https://github.com/najiite/tenna-desktop/releases/download/android-tv-v1.0.0/Tenna-IPTV-Player-AndroidTV.apk) (about 154 MB). Installed from the file (for example with the Downloader app), used with the TV remote; Android 8 or later.
 
 Not sure which Mac you have? Apple menu, then About This Mac: "Chip: Apple M…" is Apple Silicon, "Processor: Intel…" is Intel. The Intel
 file on an Apple Silicon Mac works but is several times slower. All versions are on the [Releases page](https://github.com/najiite/tenna-desktop/releases).

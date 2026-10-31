@@ -56,6 +56,8 @@ const base = `http://127.0.0.1:${cfg.proxyPort}`;
 const query = (params) => new URLSearchParams({ t: cfg.proxyToken, ...params }).toString();
 
 contextBridge.exposeInMainWorld('tennaDesktop', {
+  /** The desktop app's own version (the page's build config only knows the phone version) */
+  version: cfg.appVersion,
   /** Full screen on and off for the window */
   toggleFullscreen: () => ipcRenderer.send('tenna:toggle-fullscreen'),
   /** True when the app can convert streams (ffmpeg is bundled) */

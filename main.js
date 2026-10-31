@@ -256,7 +256,7 @@ ipcMain.on('tenna:toggle-fullscreen', (event) => {
 
 // What the preload script needs to dress the page and reach the converter
 ipcMain.on('tenna:config', (event) => {
-  event.returnValue = { appName: APP_NAME, titlebarHeight: TITLEBAR_HEIGHT, isMac: IS_MAC, isWin: IS_WIN, proxyPort, proxyToken: PROXY_TOKEN };
+  event.returnValue = { appName: APP_NAME, appVersion: app.getVersion(), titlebarHeight: TITLEBAR_HEIGHT, isMac: IS_MAC, isWin: IS_WIN, proxyPort, proxyToken: PROXY_TOKEN };
 });
 
 function createWindow() {

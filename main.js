@@ -411,7 +411,7 @@ function buildMacMenu() {
         { role: 'cut' }, { role: 'copy' }, { role: 'paste' }, { role: 'selectAll' },
       ],
     },
-    { label: 'View', submenu: [{ role: 'togglefullscreen' }] },
+    { label: 'View', submenu: [{ role: 'togglefullscreen' }, { type: 'separator' }, { role: 'toggleDevTools', label: 'Developer Tools (for bug reports)' }] },
     { label: 'Window', submenu: [{ role: 'minimize' }, { role: 'zoom' }, { role: 'close' }, { type: 'separator' }, { role: 'front' }] },
     {
       label: 'Help',

@@ -52,6 +52,16 @@ else install();
 // Full screen (the F key in the player, F11, the green button): the bar steps aside
 ipcRenderer.on('tenna:fullscreen', (_event, on) => document.documentElement.classList.toggle('tenna-fs', !!on));
 
+// Tells the app whether any video is really playing, so it can keep the display awake. Media events don't bubble, so they are caught
+// on the way down; leaving the player can remove a playing video with no event at all, which the regular check picks up.
+let playing = false;
+const syncPlaying = () => {
+  const now = [...document.querySelectorAll('video')].some((v) => !v.paused && !v.ended && v.readyState >= 2);
+  if (now !== playing) { playing = now; ipcRenderer.send('tenna:playing', now); }
+};
+for (const name of ['playing', 'pause', 'ended', 'emptied', 'error']) document.addEventListener(name, syncPlaying, true);
+setInterval(syncPlaying, 10000);
+
 const base = `http://127.0.0.1:${cfg.proxyPort}`;
 const query = (params) => new URLSearchParams({ t: cfg.proxyToken, ...params }).toString();
 

@@ -1,5 +1,5 @@
 // Tenna IPTV Player for desktop: the Expo web build (./app) in an Electron window.
-const { app, BrowserWindow, dialog, Menu, ipcMain, net, protocol, screen, shell } = require('electron');
+const { app, BrowserWindow, dialog, Menu, ipcMain, net, powerSaveBlocker, protocol, screen, shell } = require('electron');
 const { spawn } = require('node:child_process');
 const crypto = require('node:crypto');
 const fs = require('node:fs');
@@ -254,6 +254,14 @@ ipcMain.on('tenna:toggle-fullscreen', (event) => {
   if (win) win.setFullScreen(!win.isFullScreen());
 });
 
+// While something is playing the display stays on; paused, stopped or closed, the computer may sleep as usual
+let awakeBlocker = null;
+function setKeepAwake(on) {
+  if (on && awakeBlocker === null) awakeBlocker = powerSaveBlocker.start('prevent-display-sleep');
+  if (!on && awakeBlocker !== null) { powerSaveBlocker.stop(awakeBlocker); awakeBlocker = null; }
+}
+ipcMain.on('tenna:playing', (_event, playing) => setKeepAwake(!!playing));
+
 // What the preload script needs to dress the page and reach the converter
 ipcMain.on('tenna:config', (event) => {
   event.returnValue = { appName: APP_NAME, appVersion: app.getVersion(), titlebarHeight: TITLEBAR_HEIGHT, isMac: IS_MAC, isWin: IS_WIN, proxyPort, proxyToken: PROXY_TOKEN };
@@ -288,6 +296,7 @@ function createWindow() {
   });
   if (state.maximized) win.maximize();
   win.once('ready-to-show', () => { if (!HIDDEN) win.show(); });
+  win.on('closed', () => setKeepAwake(false)); // a Mac keeps the app running with no window
 
   const wc = win.webContents;
   wc.setVisualZoomLevelLimits(1, 1); // no pinch or ctrl+wheel zoom

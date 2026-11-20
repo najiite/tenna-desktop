@@ -21,6 +21,8 @@ const TITLEBAR_HEIGHT = IS_MAC ? 28 : 32;
 
 app.setName(APP_NAME);
 if (process.env.TENNA_DEBUG_PORT) app.commandLine.appendSwitch('remote-debugging-port', process.env.TENNA_DEBUG_PORT);
+// Test runs: a profile of their own (playlists, settings, window), so the real one is never touched
+if (process.env.TENNA_USER_DATA) app.setPath('userData', process.env.TENNA_USER_DATA);
 
 // Live channels start without a click
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
